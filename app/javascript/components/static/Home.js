@@ -88,7 +88,7 @@ class Home extends React.Component {
                     <>
                       <p>{link.original_url}</p>
                       <button onClick={() => this.handleClick(link)}>
-                        locahost:3000/{link.shorten_url}
+                        {window.origin}/{link.shorten_url}
                       </button>
                     </>
                   );

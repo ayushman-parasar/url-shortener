@@ -18,25 +18,31 @@ class Api::V1::LinksController < ApplicationController
     end
   end
 
-
+  def show 
+    @link.count = @link.count + 1
+    if @link.save
+      render status: :ok, json:{notice: "link found", link: @link}
+    else
+      render status: :unprocessable_entity, json:{notice: "link cannot be incremented", errors: @link.errors.full_messages }
+    end    
+  end
  
 
 
 
-  def show
-    @link  = Link.find(shorten_url: params[:id])
-    if @link
-      redirect_to @link.original_url
-    else
-      redirect_to root_url
-    end
-  end
+ 
 
   private 
 
   def link_params
-    params.require(:link).permit(:original_url,)
+    params.require(:link).permit(:original_url)
   end
 
+  def load_link
+    @link  = Link.find_by(shorten_url: params[:id])
+    if !@link
+      render status: :not_found, json:{ errors: ["Link not found"]}
+    end
+  end 
   
 end
