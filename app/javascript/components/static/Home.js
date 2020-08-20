@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import API from "../../utils/Api";
+import Linklist from "../links/Linklist";
 
 class Home extends React.Component {
   constructor(props) {
@@ -81,20 +82,12 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          <ul>
-            {this.state.all_links
-              ? this.state.all_links.map((link) => {
-                  return (
-                    <>
-                      <p>{link.original_url}</p>
-                      <button onClick={() => this.handleClick(link)}>
-                        {window.origin}/{link.shorten_url}
-                      </button>
-                    </>
-                  );
-                })
-              : null}
-          </ul>
+          <div className="d-flex justify-content-between">
+            <p>Original Url</p>
+
+            <p>Shortened Url</p>
+          </div>
+          <Linklist all_links={this.state.all_links} />
         </div>
       </React.Fragment>
     );
