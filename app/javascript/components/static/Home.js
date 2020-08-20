@@ -9,6 +9,7 @@ class Home extends React.Component {
     this.state = {
       link: this.props.link,
       all_links: this.props.links,
+      error_message: "",
     };
   }
 
@@ -32,20 +33,36 @@ class Home extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // const payload = { link: this.state.link };
-    fetch("/api/v1/links", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": document.querySelector('[name="csrf-token"]').content,
-      },
-      body: JSON.stringify(this.state),
-    }).then((res) => {
-      if (res.ok) {
+    const payload = { link: this.state.link };
+    // fetch("/api/v1/links", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "X-CSRF-TOKEN": document.querySelector('[name="csrf-token"]').content,
+    //   },
+    //   body: JSON.stringify(this.state),
+    // }).then((res) => {
+    //   console.log(res);
+    //   // if (res.ok) {
+    //   //   window.location.href = "/";
+    //   // }else{
+    //   //   this.setState({
+    //   //     errors:
+    //   //   })
+    //   // }
+    // });
+    API.fetchApi(`/api/v1/links`, "POST", payload)
+      .then((res) => {
         window.location.href = "/";
-      }
-    });
+      })
+      .catch((err) =>
+        err.json().then((data) =>
+          this.setState({
+            error_message: data.notice,
+          })
+        )
+      );
   };
 
   render() {
@@ -82,11 +99,7 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-between">
-            <p>Original Url</p>
 
-            <p>Shortened Url</p>
-          </div>
           <Linklist all_links={this.state.all_links} />
         </div>
       </React.Fragment>

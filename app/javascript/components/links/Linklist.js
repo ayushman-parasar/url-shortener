@@ -11,6 +11,20 @@ class Linklist extends React.Component {
       })
       .catch((err) => console.log(err, "error"));
   };
+
+  handleUpdate = (link) => {
+    const payload = {
+      link: {
+        pinned: !link.pinned,
+      },
+    };
+    API.fetchApi(`/api/v1/links/${link.id}`, "PATCH", payload)
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/";
+      })
+      .catch((err) => console.log(err));
+  };
   render() {
     return (
       <React.Fragment>
@@ -26,8 +40,11 @@ class Linklist extends React.Component {
             </thead>
             <tbody>
               {this.props.all_links.map((link) => (
-                <tr key={link.id}>
-                  <th scope="row" onClick={() => this.handleUpdate()}>
+                <tr
+                  className={link.pinned ? "bg-success" : "bg-white"}
+                  key={link.id}
+                >
+                  <th scope="row" onClick={() => this.handleUpdate(link)}>
                     &#128278;
                   </th>
                   <td>
