@@ -45,7 +45,7 @@ class Linklist extends React.Component {
                   key={link.id}
                 >
                   <th scope="row" onClick={() => this.handleUpdate(link)}>
-                    &#128278;
+                    {link.pinned ? "&#128205;" : " &#128278;"}
                   </th>
                   <td>
                     <a href={link.original_url} target="_blank">
