@@ -1,5 +1,6 @@
 class Link < ApplicationRecord
-
+  validates_presence_of :shorten_url, :original_url
+  validates_uniqueness_of :shorten_url
 
   def generate_short_link
     self.shorten_url = fresh_short_code
