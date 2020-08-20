@@ -2,10 +2,13 @@ class Link < ApplicationRecord
 
 
   def generate_short_link
-    loop do 
-      self.shorten_url = SecureRandom.uuid[0..6]
-      break unless Link.exists?(shorten_url: shorten_url) 
-    end
+    self.shorten_url = fresh_short_code
+  end
 
+  def fresh_short_code
+    loop do 
+      shorten = SecureRandom.uuid[0..6]
+      break shorten unless Link.exists?(shorten_url: shorten) 
+    end
   end
 end
