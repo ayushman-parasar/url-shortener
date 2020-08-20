@@ -1,4 +1,13 @@
 class Api::V1::LinksController < ApplicationController
+
+  before_action :load_link, only: :show
+  
+  def index
+    @links = Link.all
+    render status: :ok, json:{all_links: @links}
+  end
+
+  
   def create
     @link = Link.new(link_params)
     @link.generate_short_link
@@ -9,14 +18,25 @@ class Api::V1::LinksController < ApplicationController
     end
   end
 
-  def index
-    @links = Link.all
-    render status: :ok, json:{all_links: @links}
+
+ 
+
+
+
+  def show
+    @link  = Link.find(shorten_url: params[:id])
+    if @link
+      redirect_to @link.original_url
+    else
+      redirect_to root_url
+    end
   end
 
   private 
 
   def link_params
-    params.require(:link).permit(:original_url)
+    params.require(:link).permit(:original_url,)
   end
+
+  
 end

@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import API from "../../utils/Api";
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -9,15 +11,15 @@ class Home extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   fetch("/api/v1/links", {
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "X-CSRF-TOKEN": document.querySelector('[name="csrf-token"]').content,
-  //     },
-  //   }).then((res) => res.json().then((data) => console.log(data, "dasd")));
-  // }
+  handleClick = (link) => {
+    API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
+      .then((res) => {
+        console.log(res, "res from fetchapi in Home");
+        window.location.href = res.link.original_url;
+      })
+      .catch((err) => console.log(err, "error"));
+  };
+
   handleChange = (e) => {
     this.setState({
       link: {
@@ -85,7 +87,9 @@ class Home extends React.Component {
                   return (
                     <>
                       <p>{link.original_url}</p>
-                      <a href={`/${link.shorten_url}`}>{link.shorten_url}</a>
+                      <button onClick={() => this.handleClick(link)}>
+                        locahost:3000/{link.shorten_url}
+                      </button>
                     </>
                   );
                 })
