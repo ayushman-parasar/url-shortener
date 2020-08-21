@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import API from "../../utils/Api";
 import Linklist from "../links/Linklist";
 import Report from "../Report";
+import Error from "./../shared/Error";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,14 +15,14 @@ class Home extends React.Component {
     };
   }
 
-  handleClick = (link) => {
-    API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
-      .then((res) => {
-        console.log(res, "res from fetchapi in Home");
-        window.location.href = res.link.original_url;
-      })
-      .catch((err) => console.log(err, "error"));
-  };
+  // handleClick = (link) => {
+  //   API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
+  //     .then((res) => {
+  //       console.log(res, "res from fetchapi in Home");
+  //       window.location.href = res.link.original_url;
+  //     })
+  //     .catch((err) => console.log(err, "error"));
+  // };
 
   handleChange = (e) => {
     this.setState({
@@ -35,24 +36,6 @@ class Home extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const payload = { link: this.state.link };
-    // fetch("/api/v1/links", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "X-CSRF-TOKEN": document.querySelector('[name="csrf-token"]').content,
-    //   },
-    //   body: JSON.stringify(this.state),
-    // }).then((res) => {
-    //   console.log(res);
-    //   // if (res.ok) {
-    //   //   window.location.href = "/";
-    //   // }else{
-    //   //   this.setState({
-    //   //     errors:
-    //   //   })
-    //   // }
-    // });
     API.fetchApi(`/api/v1/links`, "POST", payload)
       .then((res) => {
         window.location.href = "/";
@@ -100,7 +83,9 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-
+          {this.state.error_message ? (
+            <Error errors={this.state.error_message} />
+          ) : null}
           <Linklist all_links={this.state.all_links} />
         </div>
         <Report />
