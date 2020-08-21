@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :email_lookup, only: :create
 
   def index
-    @link = Link.new
+    
     @links = Link.all
     p @links
   end

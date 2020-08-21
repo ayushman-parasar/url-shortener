@@ -9,7 +9,9 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      link: this.props.link,
+      link: {
+        original_url: "",
+      },
       all_links: this.props.links,
       error_message: "",
     };
