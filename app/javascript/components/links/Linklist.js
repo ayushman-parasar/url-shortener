@@ -6,7 +6,6 @@ class Linklist extends React.Component {
   handleClick = (link) => {
     API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
       .then((res) => {
-        console.log(res, "res from fetchapi in Home");
         window.open(res.link.original_url);
         window.location.href = "/";
       })
@@ -21,7 +20,6 @@ class Linklist extends React.Component {
     };
     API.fetchApi(`/api/v1/links/${link.id}`, "PATCH", payload)
       .then((res) => {
-        console.log(res);
         window.location.href = "/";
       })
       .catch((err) => console.log(err));

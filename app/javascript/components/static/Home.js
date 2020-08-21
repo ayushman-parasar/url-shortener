@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import API from "../../utils/Api";
 import Linklist from "../links/Linklist";
 import Report from "../Report";
-import Error from "./../shared/Error";
+import Notification from "../shared/Notification";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class Home extends React.Component {
       },
       all_links: this.props.links,
       error_message: "",
+      success_message: "",
     };
   }
 
@@ -36,16 +37,22 @@ class Home extends React.Component {
       .catch((err) =>
         err.json().then((data) =>
           this.setState({
-            error_message: data.notice,
+            error_message: {
+              isError: true,
+              errors: data.notice,
+            },
           })
         )
       );
   };
 
-  setErrors = (errors) => {
+  setErrors = (errors, bool) => {
     this.setState({
       ...this.state,
-      error_message: errors,
+      error_message: {
+        isError: bool,
+        errors,
+      },
     });
   };
 
@@ -80,11 +87,24 @@ class Home extends React.Component {
                   </form>
                 </div>
               </div>
-              <Report handleError={this.setErrors} />
+              <Report handleNotification={this.setErrors} />
             </div>
           </div>
           {this.state.error_message ? (
-            <Error errors={this.state.error_message} />
+            <Notification errorObj={this.state.error_message} isError="true" />
+          ) : null}
+          {this.state.success_message ? (
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="messages-server-wrapper">
+                    <div className="alert alert-success">
+                      {this.state.success_message}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : null}
           <Linklist all_links={this.state.all_links} />
         </div>

@@ -23,11 +23,11 @@ class Report extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     API.fetchApi("/static_pages", "POST", this.state)
-      .then((res) => console.log(res))
+      .then((res) => this.props.handleNotification([res.notice], false))
       .catch((err) => {
+        console.log(err);
         err.json().then((data) => {
-          console.log(data, "leela");
-          this.props.handleError([data.notice]);
+          this.props.handleNotification([data.notice], true);
         });
       });
   };
