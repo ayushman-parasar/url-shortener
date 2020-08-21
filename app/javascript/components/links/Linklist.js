@@ -44,7 +44,11 @@ class Linklist extends React.Component {
                   className={link.pinned ? "bg-info" : "bg-white"}
                   key={link.id}
                 >
-                  <th scope="row" onClick={() => this.handleUpdate(link)}>
+                  <th
+                    scope="row"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => this.handleUpdate(link)}
+                  >
                     {link.pinned ? <>&#128205;</> : <>&#128278;</>}
                   </th>
                   <td>
