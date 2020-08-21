@@ -41,11 +41,11 @@ class Linklist extends React.Component {
             <tbody>
               {this.props.all_links.map((link) => (
                 <tr
-                  className={link.pinned ? "bg-success" : "bg-white"}
+                  className={link.pinned ? "bg-info" : "bg-white"}
                   key={link.id}
                 >
                   <th scope="row" onClick={() => this.handleUpdate(link)}>
-                    {link.pinned ? "&#128205;" : " &#128278;"}
+                    {link.pinned? &#128205 : &#128278;}
                   </th>
                   <td>
                     <a href={link.original_url} target="_blank">
