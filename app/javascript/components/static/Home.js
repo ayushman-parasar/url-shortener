@@ -40,15 +40,22 @@ class Home extends React.Component {
       );
   };
 
+  setErrors = (errors) => {
+    this.setState({
+      ...this.state,
+      error_message: errors,
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
         <div id="subscription_area">
-          <div className="container m-5">
+          <div className="container m-4">
             <div className="row">
               <div className="col-sm-12">
                 <div className="subscribe_now">
-                  <h4 className="p-2">Url Shortener</h4>
+                  <h4 className="mb-4">Url Shortener</h4>
                   <form
                     className="subscribe_form "
                     onSubmit={this.handleSubmit}
@@ -71,6 +78,7 @@ class Home extends React.Component {
                   </form>
                 </div>
               </div>
+              <Report handleError={this.setErrors} />
             </div>
           </div>
           {this.state.error_message ? (
@@ -78,7 +86,6 @@ class Home extends React.Component {
           ) : null}
           <Linklist all_links={this.state.all_links} />
         </div>
-        <Report />
       </React.Fragment>
     );
   }

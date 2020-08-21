@@ -24,7 +24,12 @@ class Report extends React.Component {
     e.preventDefault();
     API.fetchApi("/static_pages", "POST", this.state)
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        err.json().then((data) => {
+          console.log(data, "leela");
+          this.props.handleError([data.notice]);
+        });
+      });
   };
 
   render() {

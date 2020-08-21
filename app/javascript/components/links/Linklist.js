@@ -36,7 +36,7 @@ class Linklist extends React.Component {
                 <th scope="col"></th>
                 <th scope="col">Original Url</th>
                 <th scope="col">Shortened Url</th>
-                <th scope="col">Click Count</th>
+                <th scope="col">Visit Count</th>
               </tr>
             </thead>
             <tbody>

@@ -32,6 +32,7 @@ class Api::V1::LinksController < ApplicationController
     if @link.update(link_params)
       render status: :ok, json:{notice: "updated successfully", link:@link}
     else
+      p @link.errors.full_messages    
       render status: :unprocessable_entity, json:{notice: "updation unsuccessful", errors: @link.errors.full_messages}
     end
   end
