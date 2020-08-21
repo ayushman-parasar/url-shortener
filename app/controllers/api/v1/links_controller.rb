@@ -3,13 +3,7 @@ class Api::V1::LinksController < ApplicationController
   before_action :load_link, only: :show
   
   def index
-<<<<<<< HEAD
     @links = Link.all
-=======
-    
-    @links = Link.all
-    
->>>>>>> 21a4f3a5b3585c9ec2558115e95268e884047d60
     render status: :ok, json:{all_links: @links}
   end
 
