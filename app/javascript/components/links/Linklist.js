@@ -41,7 +41,7 @@ class Linklist extends React.Component {
             <tbody>
               {this.props.all_links.map((link) => (
                 <tr
-                  className={link.pinned ? "bg-info" : "bg-white"}
+                  // className={link.pinned ? "bg-warning text-white" : "bg-white"}
                   key={link.id}
                 >
                   <th
@@ -53,7 +53,7 @@ class Linklist extends React.Component {
                   </th>
                   <td>
                     <a
-                      className="text-dark"
+                      className={"text-dark"}
                       href={link.original_url}
                       target="_blank"
                     >
