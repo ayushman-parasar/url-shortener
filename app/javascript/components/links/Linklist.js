@@ -47,7 +47,13 @@ class Linklist extends React.Component {
                   >
                     {link.pinned ? <>&#128205;</> : <>&#128278;</>}
                   </th>
-                  <td>
+                  <td
+                    style={{
+                      wordWrap: "break-word",
+                      minWidth: "160px",
+                      maxWidth: "230px",
+                    }}
+                  >
                     <a
                       className="text-dark"
                       href={link.original_url}
