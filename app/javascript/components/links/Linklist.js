@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import API from "../../utils/Api";
+
 class Linklist extends React.Component {
   handleClick = (link) => {
     API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
@@ -40,10 +41,7 @@ class Linklist extends React.Component {
             </thead>
             <tbody>
               {this.props.all_links.map((link) => (
-                <tr
-                  // className={link.pinned ? "bg-warning text-white" : "bg-white"}
-                  key={link.id}
-                >
+                <tr key={link.id}>
                   <th
                     scope="row"
                     style={{ cursor: "pointer" }}
@@ -53,7 +51,7 @@ class Linklist extends React.Component {
                   </th>
                   <td>
                     <a
-                      className={"text-dark"}
+                      className="text-dark"
                       href={link.original_url}
                       target="_blank"
                     >
