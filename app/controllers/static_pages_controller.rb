@@ -17,7 +17,8 @@ class StaticPagesController < ApplicationController
   end
 
   def create
-    email = report_params
+    email = report_params[:email]
+    p email, "email"
     if email
       ReportMailer.custom_report_email(email).deliver_now
       render status: :ok, json:{notice: "email sent"}
