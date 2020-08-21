@@ -1,7 +1,7 @@
 class Link < ApplicationRecord
   validates_presence_of :shorten_url, :original_url
-  validates_uniqueness_of :shorten_url, :original_url, message:" has been Taken"
-  validates :original_url, format: { with: URI::regexp(%w[http https]), message: "Please enter valid URL"}
+  validates_uniqueness_of :shorten_url, :original_url, message:"is already been shortened. Check below"
+  validates :original_url, format: { with: URI::regexp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/), message: "is not a valid URL"}
   default_scope { order("pinned DESC") }
 
   def generate_short_link

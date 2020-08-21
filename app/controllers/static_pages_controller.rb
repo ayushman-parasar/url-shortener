@@ -5,32 +5,25 @@ class StaticPagesController < ApplicationController
     p @links
   end
 
-  def show
-    p params
-    @link  = Link.find_by(shorten_url: params[:shorten_url])
-    if @link
-      p @link.original_url
-      redirect_to @link.original_url
-    else
-      redirect_to root_url
-    end
-  end
-
   def create
     email = report_params[:email]
-    p email, "email"
-    if email
-      ReportMailer.custom_report_email(email).deliver_now
-      render status: :ok, json:{notice: "email sent"}
-    else
-      render status: :unprocessable_entity, json:{notice: "email could not be sent"}
+    p "hello"
+    unless email.empty?
+      report_object = ReportMailer.custom_report_email(email).deliver_now
+      if report_object
+        render status: :ok, json:{notice: "email sent"}
+      else
+        render status: :not_implemented, json:{errors:["This service is not available at the moment"]}
+      end 
     end
+    render status: :unprocessable_entity, json:{notice: "email could not be sent"}  
   end
-  private
 
+  private
     def report_params
       params.require(:report).permit(:email)
     end
+
 
 
 end
