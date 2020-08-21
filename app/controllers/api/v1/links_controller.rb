@@ -3,9 +3,9 @@ class Api::V1::LinksController < ApplicationController
   before_action :load_link, only: :show
   
   def index
-    p "index"
+    
     @links = Link.all
-    p @links
+    
     render status: :ok, json:{all_links: @links}
   end
 
