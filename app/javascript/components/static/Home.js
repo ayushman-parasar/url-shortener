@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import API from "../../utils/Api";
 import Linklist from "../links/Linklist";
+import Report from "../Report";
 
 class Home extends React.Component {
   constructor(props) {
@@ -102,6 +103,7 @@ class Home extends React.Component {
 
           <Linklist all_links={this.state.all_links} />
         </div>
+        <Report />
       </React.Fragment>
     );
   }

@@ -16,5 +16,20 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def create
+    email = report_params
+    if email
+      ReportMailer.custom_report_email(email).deliver_now
+      render status: :ok, json:{notice: "email sent"}
+    else
+      render status: :unprocessable_entity, json:{notice: "email could not be sent"}
+    end
+  end
+  private
+
+    def report_params
+      params.require(:report).permit(:email)
+    end
+
 
 end
