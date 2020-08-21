@@ -1,12 +1,34 @@
 <html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <p>Report has been sent</p>
-    
-    --------------------------
-    
-   
-  </body>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+  <p>Report has been sent</p>
+
+
+  <table>
+    <tr>
+      <th>Pinned</th>
+      <th>Original Url</th>
+      <th>Shortened </th>
+      <th>Count </th>
+    </tr>
+
+    <% Link.all.each do |link| %>
+    <tr>
+      <td><%= link.pinned %></td>
+      <td><%= link.original_url %></td>
+      <td><%= link.shorten_url %></td>
+      <td><%= link.count %></td>
+    </tr>
+    <% end %>
+
+  </table>
+
+
+
+</body>
+
 </html>
