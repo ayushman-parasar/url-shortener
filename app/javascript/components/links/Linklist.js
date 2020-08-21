@@ -27,7 +27,7 @@ class Linklist extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container table-responsive py-5">
+        <div className="container table-responsive-sm py-5">
           <table className="table table-bordered table-hover">
             <thead className="thead-dr">
               <tr>
