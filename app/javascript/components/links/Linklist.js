@@ -61,7 +61,7 @@ class Linklist extends React.Component {
                       style={{ cursor: "pointer" }}
                       onClick={() => this.handleClick(link)}
                     >
-                      {window.origin + link.shorten_url}
+                      {window.origin + "/" + link.shorten_url}
                     </a>
                   </td>
                   <td>{link.count}</td>
