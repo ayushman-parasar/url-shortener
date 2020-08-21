@@ -11,6 +11,20 @@ class Linklist extends React.Component {
       })
       .catch((err) => console.log(err, "error"));
   };
+
+  handleUpdate = (link) => {
+    const payload = {
+      link: {
+        pinned: !link.pinned,
+      },
+    };
+    API.fetchApi(`/api/v1/links/${link.id}`, "PATCH", payload)
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/";
+      })
+      .catch((err) => console.log(err));
+  };
   render() {
     return (
       <React.Fragment>
@@ -18,7 +32,7 @@ class Linklist extends React.Component {
           <table className="table table-bordered table-hover">
             <thead className="thead-dr">
               <tr>
-                <th scope="col">Pin</th>
+                <th scope="col"></th>
                 <th scope="col">Original Url</th>
                 <th scope="col">Shortened Url</th>
                 <th scope="col">Click Count</th>
@@ -26,12 +40,19 @@ class Linklist extends React.Component {
             </thead>
             <tbody>
               {this.props.all_links.map((link) => (
-                <tr key={link.id}>
-                  <th scope="row" onClick={() => this.handleUpdate()}>
-                    &#128278;
+                <tr
+                  className={link.pinned ? "bg-info" : "bg-white"}
+                  key={link.id}
+                >
+                  <th scope="row" onClick={() => this.handleUpdate(link)}>
+                    {link.pinned ? <>&#128205;</> : <>&#128278;</>}
                   </th>
                   <td>
-                    <a href={link.original_url} target="_blank">
+                    <a
+                      className="text-dark"
+                      href={link.original_url}
+                      target="_blank"
+                    >
                       {link.original_url}
                     </a>
                   </td>

@@ -5,6 +5,7 @@ class Api::V1::LinksController < ApplicationController
   def index
     p "index"
     @links = Link.all
+    p @links
     render status: :ok, json:{all_links: @links}
   end
 
@@ -28,15 +29,23 @@ class Api::V1::LinksController < ApplicationController
     end    
   end
  
+  def update
+    @link = Link.find_by(id: params[:id])
+    if @link.update(link_params)
+      render status: :ok, json:{notice: "updated successfully", link:@link}
+    else
+      render status: :unprocessable_entity, json:{notice: "updation unsuccessful", errors: @link.errors.full_messages}
+    end
+  end
 
 
 
  
-
+  
   private 
 
   def link_params
-    params.require(:link).permit(:original_url)
+    params.require(:link).permit(:original_url, :pinned)
   end
 
   def load_link
@@ -45,5 +54,6 @@ class Api::V1::LinksController < ApplicationController
       render status: :not_found, json:{ errors: ["Link not found"]}
     end
   end 
+
   
 end

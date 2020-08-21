@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   def index
     @link = Link.new
     @links = Link.all
+    p @links
   end
 
   def show
