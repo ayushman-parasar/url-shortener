@@ -15,15 +15,6 @@ class Home extends React.Component {
     };
   }
 
-  // handleClick = (link) => {
-  //   API.fetchApi(`/api/v1/links/${link.shorten_url}`, "GET")
-  //     .then((res) => {
-  //       console.log(res, "res from fetchapi in Home");
-  //       window.location.href = res.link.original_url;
-  //     })
-  //     .catch((err) => console.log(err, "error"));
-  // };
-
   handleChange = (e) => {
     this.setState({
       link: {
@@ -57,7 +48,7 @@ class Home extends React.Component {
             <div className="row">
               <div className="col-sm-12">
                 <div className="subscribe_now">
-                  <h4>Url Shortener</h4>
+                  <h3 className="p-3">Url Shortener</h3>
 
                   <form
                     className="subscribe_form "

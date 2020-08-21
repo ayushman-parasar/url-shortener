@@ -1,8 +1,8 @@
 @import "bootstrap";
 
 .subscribe_now {
-  h4 {
-    font-size: 14px;
+  h3 {
+    font-size: 18px;
     line-height: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -101,4 +101,21 @@
 .font-s{
   font-size: x-small;;
   font-weight: bold;
+}
+
+.header{
+  font-size: 2rem;
+  font-weight: bold;
+  
+  border: 3px solid hsl(157, 86%, 44%);
+}
+
+.logo{
+  color: hsl(157, 86%, 44%);
+  text-decoration: none;
+}
+
+.logo:hover{
+  text-decoration: none;
+  color: #0ed085;
 }
