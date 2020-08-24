@@ -12,7 +12,7 @@ class Api::V1::LinksController < ApplicationController
     @link = Link.new(link_params)
     @link.generate_short_link
     if @link.save
-      render status: :ok, json:{notice: "Succecfully shortened url", url:@link}
+      render status: :ok, json:{notice: "Successfully shortened given URL", url:@link}
     else
       render status: :unprocessable_entity, json: {notice: @link.errors.full_messages}
     end
