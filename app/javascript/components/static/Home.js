@@ -35,7 +35,7 @@ class Home extends React.Component {
         this.setNotification([res.notice], false);
         setTimeout(function () {
           window.location.href = "/";
-        }, 950);
+        }, 750);
       })
       .catch((err) =>
         err.json().then((data) =>
