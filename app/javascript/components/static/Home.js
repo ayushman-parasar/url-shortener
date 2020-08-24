@@ -32,7 +32,10 @@ class Home extends React.Component {
     const payload = { link: this.state.link };
     API.fetchApi(`/api/v1/links`, "POST", payload)
       .then((res) => {
-        window.location.href = "/";
+        this.setNotification([res.notice], false);
+        setTimeout(function () {
+          window.location.href = "/";
+        }, 1050);
       })
       .catch((err) =>
         err.json().then((data) =>
@@ -46,7 +49,7 @@ class Home extends React.Component {
       );
   };
 
-  setErrors = (errors, bool) => {
+  setNotification = (errors, bool) => {
     this.setState({
       ...this.state,
       error_message: {
@@ -73,7 +76,7 @@ class Home extends React.Component {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Enter your URL"
+                        placeholder="Enter your URL with http or https"
                         name="original_url"
                         value={this.state.link.original_url}
                         onChange={this.handleChange}
@@ -87,7 +90,7 @@ class Home extends React.Component {
                   </form>
                 </div>
               </div>
-              <Report handleNotification={this.setErrors} />
+              <Report handleNotification={this.setNotification} />
             </div>
           </div>
           {this.state.error_message ? (

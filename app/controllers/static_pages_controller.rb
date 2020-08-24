@@ -13,8 +13,19 @@ class StaticPagesController < ApplicationController
     if report_object
       render status: :ok, json:{notice: "email sent"}
     else
-      render status: :not_implemented, json:{notice: "email could not be sent"}
-      
+      render status: :not_implemented, json:{notice: "email could not be sent"} 
+    end
+  end
+
+  def show
+    # p params
+    # @link  = Link.find_by(shorten_url: params[:id])
+    @link  = Link.find_by_shorten_url(params[:id])
+    if @link
+      p @link.original_url
+      redirect_to @link.original_url
+    else
+      redirect_to root_url
     end
   end
 

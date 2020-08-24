@@ -68,6 +68,7 @@ class Linklist extends React.Component {
                       onClick={() => this.handleClick(link)}
                     >
                       {window.origin + "/" + link.shorten_url}
+                      {/* {window.origin + "/static_pages" + link.shorten_url} */}
                     </a>
                   </td>
                   <td>{link.count}</td>
